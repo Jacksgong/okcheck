@@ -21,7 +21,8 @@ import com.android.build.gradle.internal.dsl.TestOptions
 import com.liulishuo.okcheck.util.DestinationUtil
 import org.gradle.api.Project
 import org.gradle.api.plugins.quality.CheckstyleExtension
-import org.gradle.api.plugins.quality.FindBugsExtension
+
+//import org.gradle.api.plugins.quality.FindBugsExtension
 import org.gradle.api.plugins.quality.PmdExtension
 import org.gradle.util.ConfigureUtil
 
@@ -29,8 +30,8 @@ class OkCheckExtension {
     @NonNull
     private final CheckStyleOptions checkstyle
 
-    @NonNull
-    private final FindBugsOptions findbugs
+//    @NonNull
+//    private final FindBugsOptions findbugs
 
     @NonNull
     private final PmdOptions pmd
@@ -38,11 +39,11 @@ class OkCheckExtension {
     @NonNull
     private final KtLintOptions ktlint
 
-    @NonNull
-    private final LintOptions lint
+//    @NonNull
+//    private final LintOptions lint
 
-    @NonNull
-    private final UnitTestOptions unitTest
+//    @NonNull
+//    private final UnitTestOptions unitTest
 
     @NonNull
     private final CoverageReportOptions coverageReport
@@ -53,8 +54,8 @@ class OkCheckExtension {
         checkstyle = new CheckStyleOptions(project)
         checkstyle.setDestination(destination)
 
-        findbugs = new FindBugsOptions(project)
-        findbugs.setDestination(destination)
+//        findbugs = new FindBugsOptions(project)
+//        findbugs.setDestination(destination)
 
         pmd = new PmdOptions(project)
         pmd.setDestination(destination)
@@ -62,31 +63,31 @@ class OkCheckExtension {
         ktlint = new KtLintOptions(project)
         ktlint.setDestination(destination)
 
-        lint = new LintOptions(project)
-        lint.setDestination(destination)
+//        lint = new LintOptions(project)
+//        lint.setDestination(destination)
 
-        unitTest = new UnitTestOptions(project)
-        unitTest.setDestination(destination)
+//        unitTest = new UnitTestOptions(project)
+//        unitTest.setDestination(destination)
 
         coverageReport = new CoverageReportOptions(project)
         coverageReport.setDestination(destination)
     }
 
     void setExclude(String[] exclude) {
-        this.findbugs.exclude = exclude
+//        this.findbugs.exclude = exclude
         this.checkstyle.exclude = exclude
         this.pmd.exclude = exclude
         this.ktlint.exclude = exclude
-        this.lint.exclude = exclude
+//        this.lint.exclude = exclude
     }
 
     void setDestination(File destination) {
-        this.findbugs.setDestination(destination)
+//        this.findbugs.setDestination(destination)
         this.checkstyle.setDestination(destination)
         this.pmd.setDestination(destination)
         this.ktlint.setDestination(destination)
-        this.lint.setDestination(destination)
-        this.unitTest.setDestination(destination)
+//        this.lint.setDestination(destination)
+//        this.unitTest.setDestination(destination)
         this.coverageReport.setDestination(destination)
     }
 
@@ -123,10 +124,10 @@ class OkCheckExtension {
         return checkstyle
     }
 
-    @NonNull
-    FindBugsOptions getFindbugs() {
-        return findbugs
-    }
+//    @NonNull
+//    FindBugsOptions getFindbugs() {
+//        return findbugs
+//    }
 
     @NonNull
     PmdOptions getPmd() {
@@ -138,15 +139,15 @@ class OkCheckExtension {
         return ktlint
     }
 
-    @NonNull
-    LintOptions getLint() {
-        return lint
-    }
+//    @NonNull
+//    LintOptions getLint() {
+//        return lint
+//    }
 
-    @NonNull
-    UnitTestOptions getUnitTest() {
-        return unitTest
-    }
+//    @NonNull
+//    UnitTestOptions getUnitTest() {
+//        return unitTest
+//    }
 
     @NonNull
     CoverageReportOptions getCoverageReport() {
@@ -207,38 +208,38 @@ class OkCheckExtension {
         }
     }
 
-    static class LintOptions extends com.android.build.gradle.internal.dsl.LintOptions {
-        boolean enabled = true
-
-        @NonNull
-        private final CommonHelper common
-
-
-        LintOptions(Project project) {
-            common = new CommonHelper(project, "lint")
-            this.htmlReport = true
-        }
-
-        void setDestination(File destination) {
-            common.setDestination(destination)
-            this.htmlOutput = common.htmlFile
-        }
-
-        void setExclude(String... exclude) {
-            common.exclude = exclude
-        }
-
-        @NonNull
-        String[] getExclude() {
-            return common.exclude
-        }
-    }
+//    static class LintOptions extends com.android.build.gradle.internal.dsl.LintOptions {
+//        boolean enabled = true
+//
+//        @NonNull
+//        private final CommonHelper common
+//
+//
+//        LintOptions(Project project) {
+//            common = new CommonHelper(project, "lint")
+//            this.htmlReport = true
+//        }
+//
+//        void setDestination(File destination) {
+//            common.setDestination(destination)
+//            this.htmlOutput = common.htmlFile
+//        }
+//
+//        void setExclude(String... exclude) {
+//            common.exclude = exclude
+//        }
+//
+//        @NonNull
+//        String[] getExclude() {
+//            return common.exclude
+//        }
+//    }
 
     static class KtLintOptions {
         boolean enabled = true
 
         @NonNull
-        String version = "0.22.0"
+        String version = "0.29.0"
 
         @NonNull
         private final CommonHelper common
@@ -323,45 +324,45 @@ class OkCheckExtension {
         boolean enabled = false
     }
 
-    static class FindBugsOptions extends FindBugsExtension {
-
-        boolean enabled = true
-
-        boolean reportXml = false
-        boolean reportHtml = true
-
-        @NonNull
-        private final CommonHelper common
-
-
-        FindBugsOptions(Project project) {
-            super(project)
-            common = new CommonHelper(project, "findbugs")
-        }
-
-        void setDestination(File destination) {
-            common.setDestination(destination)
-        }
-
-        @NonNull
-        File getHtmlFile() {
-            return common.htmlFile
-        }
-
-        @NonNull
-        File getXmlFile() {
-            return common.xmlFile
-        }
-
-        void setExclude(String... exclude) {
-            common.exclude = exclude
-        }
-
-        @NonNull
-        String[] getExclude() {
-            return common.exclude
-        }
-    }
+//    static class FindBugsOptions extends FindBugsExtension {
+//
+//        boolean enabled = true
+//
+//        boolean reportXml = false
+//        boolean reportHtml = true
+//
+//        @NonNull
+//        private final CommonHelper common
+//
+//
+//        FindBugsOptions(Project project) {
+//            super(project)
+//            common = new CommonHelper(project, "findbugs")
+//        }
+//
+//        void setDestination(File destination) {
+//            common.setDestination(destination)
+//        }
+//
+//        @NonNull
+//        File getHtmlFile() {
+//            return common.htmlFile
+//        }
+//
+//        @NonNull
+//        File getXmlFile() {
+//            return common.xmlFile
+//        }
+//
+//        void setExclude(String... exclude) {
+//            common.exclude = exclude
+//        }
+//
+//        @NonNull
+//        String[] getExclude() {
+//            return common.exclude
+//        }
+//    }
 
     static class PmdOptions extends PmdExtension {
 

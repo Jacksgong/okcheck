@@ -46,10 +46,10 @@ class OkCheckPlugin implements Plugin<Project> {
 
                 okCheckExtension = configureIncrementTask(project,okCheckExtension)
 
-                OkLint.inspectLint(project, okCheckExtension.lint)
+//                OkLint.inspectLint(project, okCheckExtension.lint)
                 if (okCheckExtension.checkStyle.enabled) OkCheckStyleTask.addTask(project, okCheckExtension.checkStyle)
                 if (okCheckExtension.pmd.enabled) OkPmdTask.addTask(project, okCheckExtension.pmd)
-                if (okCheckExtension.findbugs.enabled) OkFindbugsTask.addTask(project, okCheckExtension.findbugs)
+//                if (okCheckExtension.findbugs.enabled) OkFindbugsTask.addTask(project, okCheckExtension.findbugs)
                 if (okCheckExtension.ktlint.enabled) OkKtlintTask.addTask(project, okCheckExtension.ktlint)
                 if (okCheckExtension.coverageReport.isEnabled()) OkCoverageReport.addTask(project, okCheckExtension.coverageReport)
                 // unit-test
@@ -80,13 +80,13 @@ class OkCheckPlugin implements Plugin<Project> {
         if (changeFiles.isEmpty()) return okCheckExtension
 
         boolean isEnableCheckStyle = false
-        boolean isEnableFindBugs = false
+//        boolean isEnableFindBugs = false
         boolean isEnablePMD = false
         boolean isEnableKtLint = false
         for (String fileName : changeFiles) {
             if (fileName.contains(".java")) {
                 if (okCheckExtension.checkStyle.enabled) isEnableCheckStyle = true
-                if (okCheckExtension.findbugs.enabled) isEnableFindBugs = true
+//                if (okCheckExtension.findbugs.enabled) isEnableFindBugs = true
                 if (okCheckExtension.pmd.enabled) isEnablePMD = true
             } else if (fileName.contains(".kt")) {
                 if (okCheckExtension.ktlint.enabled) isEnableKtLint = true
@@ -94,7 +94,7 @@ class OkCheckPlugin implements Plugin<Project> {
         }
 
         okCheckExtension.checkStyle.enabled = isEnableCheckStyle
-        okCheckExtension.findbugs.enabled = isEnableFindBugs
+//        okCheckExtension.findbugs.enabled = isEnableFindBugs
         okCheckExtension.pmd.enabled = isEnablePMD
         okCheckExtension.ktlint.enabled = isEnableKtLint
         return okCheckExtension

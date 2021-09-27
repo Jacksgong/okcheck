@@ -23,6 +23,7 @@ import org.apache.commons.io.FileUtils
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 
 class OkCheckTask extends DefaultTask {
@@ -73,25 +74,25 @@ class OkCheckTask extends DefaultTask {
             })
         }
         if (!dependsTaskNames) {
-            if (extension.lint.enabled) {
-                dependsTaskNames.add(Util.getBuildInTaskName(project.name, taskName, "okLint", flavor, buildType, firstFlavor))
-            }
-            if (extension.unitTest.enabled) {
-                // unit test only have test, test${buildType}UnitTest and test$flavor${buildType}UnitTest
-                if (buildType.isEmpty() && flavor.isEmpty()) {
-                    dependsTaskNames.add("test")
-                } else {
-                    dependsTaskNames.add(Util.getBuildInTaskName(project.name, taskName, "test", flavor, buildType, firstFlavor, "UnitTest"))
-                }
-            }
+//            if (extension.lint.enabled) {
+//                dependsTaskNames.add(Util.getBuildInTaskName(project.name, taskName, "okLint", flavor, buildType, firstFlavor))
+//            }
+//            if (extension.unitTest.enabled) {
+//                // unit test only have test, test${buildType}UnitTest and test$flavor${buildType}UnitTest
+//                if (buildType.isEmpty() && flavor.isEmpty()) {
+//                    dependsTaskNames.add("test")
+//                } else {
+//                    dependsTaskNames.add(Util.getBuildInTaskName(project.name, taskName, "test", flavor, buildType, firstFlavor, "UnitTest"))
+//                }
+//            }
             if (extension.coverageReport.enabled) dependsTaskNames.add(OkCoverageReport.getTaskName(flavor, buildType))
             if (extension.checkStyle.enabled) dependsTaskNames.add(OkCheckStyleTask.NAME)
             if (extension.pmd.enabled) dependsTaskNames.add(OkPmdTask.NAME)
-            if (extension.findbugs.enabled) dependsTaskNames.add("${OkFindbugsTask.NAME}$flavor$buildType")
+//            if (extension.findbugs.enabled) dependsTaskNames.add("${OkFindbugsTask.NAME}$flavor$buildType")
             if (extension.ktlint.enabled) dependsTaskNames.add(OkKtlintTask.NAME)
         }
 
-        project.task(taskName, type: OkCheckTask, overwrite: true) {
+        project.task(taskName, type: OkCheckTask, overwrite: false) {
 //            inputs.files(Util.getAllInputs(project))
 //            outputs.dir(project.buildDir)
 
@@ -106,11 +107,11 @@ class OkCheckTask extends DefaultTask {
             changedModuleList = moduleList
             isMock = false
 
-            File unitTestReportDir = extension.getUnitTest().reportDir
-            if (!unitTestReportDir.getAbsolutePath().startsWith(project.buildDir.getAbsolutePath()))
-                doLast {
-                    if (extension.unitTest.enabled) moveUnitTestReport(project, unitTestReportDir)
-                }
+//            File unitTestReportDir = extension.getUnitTest().reportDir
+//            if (!unitTestReportDir.getAbsolutePath().startsWith(project.buildDir.getAbsolutePath()))
+//                doLast {
+//                    if (extension.unitTest.enabled) moveUnitTestReport(project, unitTestReportDir)
+//                }
         }
     }
 

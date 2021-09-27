@@ -49,7 +49,7 @@ class OkPmdTask extends Pmd {
 
             project.extensions.pmd.with {
 
-                toolVersion = '5.6.1'
+                toolVersion = '6.0.0'
                 reports {
                     html.setDestination(outputFile)
                     html.enabled = true

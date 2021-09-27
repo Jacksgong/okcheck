@@ -61,7 +61,10 @@ class ChangeFile {
         while (true) {
             File backupFile = new File(backupPath)
             if (backupFile.exists()) {
-                candidateId = backupFile.readLines().get(0)
+                List<String> lines = backupFile.readLines()
+                if (lines.size() > 0) {
+                    candidateId = lines.get(0)
+                }
             }
             List<String> allBeforeCommitIds = GitUtil.getAllBeforeCommitIds()
             if (candidateId != null && allBeforeCommitIds.contains(candidateId)) {
@@ -185,7 +188,7 @@ class ChangeFile {
         def lines = backupFile.readLines()
         boolean isFirstLine = true
         for (String commitId : newCommitIds) {
-            if (commitId.size() > 0 && lines.get(0).contains(commitId)) continue
+            if (commitId.size() > 0 && lines.size() > 0 && lines.get(0).contains(commitId)) continue
             if (isFirstLine) {
                 isFirstLine = false
                 lines.add(0,commitId)
